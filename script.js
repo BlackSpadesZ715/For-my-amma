@@ -8,7 +8,7 @@ intro.onclick = () => {
   music.play().catch(()=>{});
 };
 
-// SKY + MOON
+// SKY
 window.addEventListener("scroll", () => {
   let p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
   scene1.style.background = `rgb(${255-200*p},${150-100*p},${100+150*p})`;
@@ -20,7 +20,6 @@ setInterval(() => {
   let p = document.createElement("div");
   p.className = "petal";
   p.style.left = Math.random()*100+"vw";
-  p.style.animationDuration = 5+Math.random()*5+"s";
   document.querySelector(".flowers").appendChild(p);
   setTimeout(()=>p.remove(),10000);
 },300);
@@ -41,9 +40,6 @@ const letter = document.getElementById("letter");
 const letterText = document.getElementById("letterText");
 
 const message = `Amma...
-
-I don’t say this enough...
-but everything I am is because of you.
 
 You scold me… but still feed me extra.
 
@@ -70,14 +66,10 @@ canvas.height = window.innerHeight;
 
 function firework(){
   for(let i=0;i<80;i++){
-    let x=Math.random()*canvas.width;
-    let y=Math.random()*canvas.height/2;
-    ctx.fillStyle="white";
-    ctx.fillRect(x,y,2,2);
+    ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height/2,2,2);
   }
 }
 
-// OPEN LETTER
 envelope.onclick = () => {
   letter.style.display="block";
   setTimeout(()=>letter.style.opacity="1",50);
@@ -98,25 +90,30 @@ window.addEventListener("scroll",()=>{
   document.querySelectorAll(".memory").forEach((img,i)=>{
     if(scrollY>1000+i*400){
       img.style.opacity=1;
-      img.style.top="20%";
-      img.style.left="10%";
     }
   });
 });
 
-// GAME
-let score=0;
+// 🎮 GAME FIXED
+const gameArea = document.getElementById("gameArea");
+let score = 0;
+
 setInterval(()=>{
   let h=document.createElement("div");
   h.className="falling-heart";
   h.innerHTML="❤️";
-  h.style.left=Math.random()*100+"vw";
+
+  h.style.left = Math.random() * (gameArea.clientWidth - 30) + "px";
+
   gameArea.appendChild(h);
 
-  h.onclick=()=>{
+  h.onclick=(e)=>{
+    e.stopPropagation();
     score++;
     document.getElementById("score").innerText=score;
-    h.remove();
+
+    h.style.transform="scale(1.5)";
+    setTimeout(()=>h.remove(),100);
   };
 
   setTimeout(()=>h.remove(),4000);
