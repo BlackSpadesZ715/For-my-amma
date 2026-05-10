@@ -5,18 +5,19 @@ intro.addEventListener("click", () => {
 });
 
 window.addEventListener("scroll", () => {
-  const moon = document.getElementById("moon");
-moon.style.top = `${80 - progress * 60}%`;
   const scroll = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   const progress = scroll / maxScroll;
 
   const scene = document.getElementById("scene1");
 
-  // STRONG color change (very visible)
   const r = Math.floor(255 - progress * 255);
   const g = Math.floor(150 - progress * 150);
   const b = Math.floor(100 + progress * 155);
 
   scene.style.background = `rgb(${r}, ${g}, ${b})`;
+
+  // 👇 ADD THIS PART
+  const moon = document.getElementById("moon");
+  moon.style.top = `${80 - progress * 60}%`;
 });
