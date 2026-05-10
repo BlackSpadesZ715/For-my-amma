@@ -137,20 +137,29 @@ body, html {
 .envelope:hover {
   transform: scale(1.2);
 }
-
+#letterText {
+  margin-top: 10px;
+}
 .letter {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
+  background: #fffaf0;
   color: black;
-  padding: 20px;
+  padding: 25px;
   width: 80%;
   max-width: 400px;
-  border-radius: 10px;
+  border-radius: 12px;
   display: none;
   z-index: 200;
-  text-align: center;
+  text-align: left;
   font-size: 1.2rem;
+  line-height: 1.6;
+
+  max-height: 70vh;
+  overflow-y: auto;
+
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
