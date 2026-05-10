@@ -23,9 +23,10 @@ window.addEventListener("scroll", () => {
 });
 const flowerContainer = document.querySelector(".flowers");
 
-function createPetal() {
-  const petal = document.createElement("div");
-  petal.classList.add("petal");
+if (flowerContainer) {
+  function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
 
   petal.style.left = Math.random() * 100 + "vw";
   petal.style.animationDuration = 5 + Math.random() * 5 + "s";
@@ -33,8 +34,11 @@ function createPetal() {
   flowerContainer.appendChild(petal);
 
   setTimeout(() => {
-    petal.remove();
-  }, 10000);
+      petal.remove();
+    }, 10000);
+  }
+
+  setInterval(createPetal, 300);
 }
 
 setInterval(createPetal, 300);
