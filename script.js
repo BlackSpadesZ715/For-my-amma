@@ -5,6 +5,8 @@ intro.addEventListener("click", () => {
 });
 
 window.addEventListener("scroll", () => {
+  const moon = document.getElementById("moon");
+moon.style.top = `${80 - progress * 60}%`;
   const scroll = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
   const progress = scroll / maxScroll;
