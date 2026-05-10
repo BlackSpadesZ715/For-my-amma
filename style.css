@@ -106,3 +106,19 @@ body, html {
     transform: translateY(110vh) rotate(360deg);
   }
 }
+.spark {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: sparkle 0.5s linear;
+}
+
+@keyframes sparkle {
+  to {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
