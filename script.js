@@ -108,8 +108,7 @@ My everything.
 I love you… more than my words know how to hold. ❤️`;
 
 const letterText = document.getElementById("letterText");
-
-// ✍️ Typing effect
+// ✍️ Typing effect (unchanged)
 function typeLetter(text, element, speed = 40) {
   let i = 0;
   element.innerHTML = "";
@@ -125,13 +124,12 @@ function typeLetter(text, element, speed = 40) {
   typing();
 }
 
-// 💥 Fireworks CONTROL
+// 💥 Fireworks (FIXED SYSTEM)
 let fireworksActive = false;
+let particles = [];
 
-// 💥 Create one firework burst
+// create one burst
 function createFirework() {
-  let particles = [];
-
   let startX = Math.random() * canvas.width;
   let startY = Math.random() * canvas.height / 2;
 
@@ -147,41 +145,58 @@ function createFirework() {
       life: 50
     });
   }
-
-  function animate() {
-    if (!fireworksActive) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach(p => {
-      if (p.life > 0) {
-        ctx.fillStyle = "white";
-        ctx.fillRect(p.x, p.y, 2, 2);
-
-        p.x += p.dx;
-        p.y += p.dy;
-        p.life--;
-      }
-    });
-
-    if (particles.some(p => p.life > 0)) {
-      requestAnimationFrame(animate);
-    }
-  }
-
-  animate();
 }
 
-// 💥 Start multiple bursts
+// main animation loop (ONLY ONE)
+function animateFireworks() {
+  if (!fireworksActive) return;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  particles.forEach(p => {
+    if (p.life > 0) {
+      ctx.fillStyle = "white";
+      ctx.fillRect(p.x, p.y, 2, 2);
+
+      p.x += p.dx;
+      p.y += p.dy;
+      p.life--;
+    }
+  });
+
+  // remove dead particles
+  particles = particles.filter(p => p.life > 0);
+
+  requestAnimationFrame(animateFireworks);
+}
+
+// start bursts
 function startFireworks() {
+  particles = []; // reset
   for (let i = 0; i < 15; i++) {
     setTimeout(() => {
       createFirework();
-    }, i * 150); // staggered bursts (looks cinematic)
+    }, i * 150);
   }
 }
 
-// 💌 Click event (FINAL)
+// close letter (unchanged)
+document.addEventListener("click", (e) => {
+  if (
+    letter.style.display === "block" &&
+    !letter.contains(e.target) &&
+    e.target.id !== "envelope"
+  ) {
+    letter.style.opacity = "0";
+
+    setTimeout(() => {
+      letter.style.display = "none";
+      letterText.innerHTML = "";
+    }, 500);
+  }
+});
+
+// 💌 Click event (FINAL FIXED)
 envelope.addEventListener("click", () => {
   letter.style.display = "block";
 
@@ -191,15 +206,19 @@ envelope.addEventListener("click", () => {
 
   typeLetter(message, letterText);
 
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   fireworksActive = true;
   startFireworks();
+  animateFireworks(); // 👈 start loop ONCE
 
-  // 🛑 STOP after 3 seconds
   setTimeout(() => {
     fireworksActive = false;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }, 3000);
 });
+
+// 📸 Memories (unchanged)
 const memories = document.querySelectorAll(".memory");
 
 window.addEventListener("scroll", () => {
