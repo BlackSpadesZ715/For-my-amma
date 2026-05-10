@@ -165,3 +165,19 @@ body, html {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
+.memories {
+  height: 300vh;
+  position: relative;
+  background: linear-gradient(to bottom, transparent, black);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.memory {
+  position: absolute;
+  max-width: 80%;
+  border-radius: 15px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
