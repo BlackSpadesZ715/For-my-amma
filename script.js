@@ -11,9 +11,10 @@ window.addEventListener("scroll", () => {
 
   const scene = document.getElementById("scene1");
 
-  const r = Math.floor(255 - progress * 200);
-  const g = Math.floor(126 - progress * 100);
-  const b = Math.floor(95 + progress * 100);
+  // STRONG color change (very visible)
+  const r = Math.floor(255 - progress * 255);
+  const g = Math.floor(150 - progress * 150);
+  const b = Math.floor(100 + progress * 155);
 
   scene.style.background = `rgb(${r}, ${g}, ${b})`;
 });
