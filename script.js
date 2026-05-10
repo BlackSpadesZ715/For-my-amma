@@ -58,12 +58,12 @@ document.addEventListener("mousemove", (e) => {
   }, 500);
 });
 
-// 💌 Elements
+// 💌 Envelope + Letter + Fireworks
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
+const letterText = document.getElementById("letterText");
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
-const letterText = document.getElementById("letterText");
 
 // canvas size
 canvas.width = window.innerWidth;
@@ -75,18 +75,41 @@ const message = `Amma...
 I don’t say this enough...
 but everything I am… every little good thing in me… is because of you.
 
-You scold me… but still feed me extra.
+The way I speak, the way I care, the way I try again even when I’m tired…
+that all comes from watching you.
+
+You scold me… sometimes a lot…
+but even then, you’re the same person who asks if I’ve eaten,
+who secretly gives me the bigger portion,
+who pretends to be strict but melts the second I’m quiet.
 
 You always take care of me,
-even when I don’t notice.
+in ways so small I don’t even notice in the moment…
+but later, they sit in my heart like warm light.
 
-I may not always say it...
-but I feel it every day.
+You’ve carried so much for me…
+things I didn’t see, things I didn’t understand…
+and yet you never let me feel that weight.
 
-I love you ❤️`;
+I may not always say it…
+I may act stubborn, or distant, or lost in my own world…
+but not a single day passes where I don’t feel your love around me.
+
+It’s in the food you make,
+in the way you call my name,
+in the quiet way you worry about me even when you don’t say it out loud.
+
+And maybe I don’t say this enough…
+maybe I never will be able to say it as deeply as I feel it…
+
+…but Amma, you are my home.
+My safe place.
+My everything.
+
+I love you… more than my words know how to hold. ❤️`;
 
 // ✍️ Typing effect
-function typeLetter(text, element, speed = 40) {
+function typeLetter(text, element, speed = 35) {
   let i = 0;
   element.innerHTML = "";
 
@@ -109,7 +132,7 @@ function createFirework() {
   let startX = Math.random() * canvas.width;
   let startY = Math.random() * canvas.height / 2;
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 60; i++) {
     let angle = Math.random() * 2 * Math.PI;
     let speed = Math.random() * 4;
 
@@ -118,7 +141,7 @@ function createFirework() {
       y: startY,
       dx: Math.cos(angle) * speed,
       dy: Math.sin(angle) * speed,
-      life: 50
+      life: 60
     });
   }
 }
@@ -146,6 +169,7 @@ function animateFireworks() {
 
 function startFireworks() {
   particles = [];
+
   for (let i = 0; i < 15; i++) {
     setTimeout(() => {
       createFirework();
@@ -154,9 +178,7 @@ function startFireworks() {
 }
 
 // 💌 Open letter
-envelope.addEventListener("click", (e) => {
-  e.stopPropagation(); // 👈 VERY IMPORTANT (prevents instant close)
-
+envelope.addEventListener("click", () => {
   letter.style.display = "block";
 
   setTimeout(() => {
@@ -177,37 +199,33 @@ envelope.addEventListener("click", (e) => {
   }, 3000);
 });
 
-// 💌 Close letter (FIXED)
+// ❌ Close letter (click outside)
 document.addEventListener("click", (e) => {
-  if (letter.style.display === "block") {
-    const insideLetter = letter.contains(e.target);
+  if (
+    letter.style.display === "block" &&
+    !letter.contains(e.target) &&
+    e.target.id !== "envelope"
+  ) {
+    letter.style.opacity = "0";
 
-    if (!insideLetter) {
-      letter.style.opacity = "0";
-
-      setTimeout(() => {
-        letter.style.display = "none";
-        letterText.innerHTML = "";
-      }, 400);
-    }
+    setTimeout(() => {
+      letter.style.display = "none";
+      letterText.innerHTML = "";
+    }, 500);
   }
 });
 
-// 📸 Memories (FIXED overlap)
+// 📸 Memories (FIXED with class toggle)
 const memories = document.querySelectorAll(".memory");
 
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
 
   memories.forEach((img, index) => {
-    if (scroll > 1000 + index * 400) {
-      img.style.opacity = "1";
-      img.style.zIndex = "10";
-      img.style.transform = "scale(1)";
+    if (scroll > 1200 + index * 400) {
+      img.classList.add("show");
     } else {
-      img.style.opacity = "0";
-      img.style.zIndex = "1";
-      img.style.transform = "scale(0.9)";
+      img.classList.remove("show");
     }
   });
 });
