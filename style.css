@@ -18,8 +18,8 @@ body, html {
   cursor: pointer;
   z-index: 10;
 }
-
 .scene {
+  position: relative; /* 👈 THIS is the magic line */
   height: 300vh;
   display: flex;
   justify-content: center;
@@ -27,7 +27,6 @@ body, html {
   background: linear-gradient(to top, #ff7e5f, #feb47b);
   transition: background 1s;
 }
-
 .text {
   color: white;
   font-size: 2rem;
