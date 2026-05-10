@@ -125,51 +125,78 @@ function typeLetter(text, element, speed = 40) {
   typing();
 }
 
-// 💥 Fireworks
+// 💥 Fireworks CONTROL
+let fireworksActive = false;
+
+// 💥 Create one firework burst
 function createFirework() {
-  let x = Math.random() * canvas.width;
-  let y = Math.random() * canvas.height / 2;
+  let particles = [];
+
+  let startX = Math.random() * canvas.width;
+  let startY = Math.random() * canvas.height / 2;
 
   for (let i = 0; i < 50; i++) {
     let angle = Math.random() * 2 * Math.PI;
     let speed = Math.random() * 4;
 
-    let dx = Math.cos(angle) * speed;
-    let dy = Math.sin(angle) * speed;
+    particles.push({
+      x: startX,
+      y: startY,
+      dx: Math.cos(angle) * speed,
+      dy: Math.sin(angle) * speed,
+      life: 50
+    });
+  }
 
-    let life = 50;
+  function animate() {
+    if (!fireworksActive) return;
 
-    function animate() {
-      if (life-- <= 0) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "white";
-      ctx.fillRect(x, y, 2, 2);
+    particles.forEach(p => {
+      if (p.life > 0) {
+        ctx.fillStyle = "white";
+        ctx.fillRect(p.x, p.y, 2, 2);
 
-      x += dx;
-      y += dy;
+        p.x += p.dx;
+        p.y += p.dy;
+        p.life--;
+      }
+    });
 
+    if (particles.some(p => p.life > 0)) {
       requestAnimationFrame(animate);
     }
-
-    animate();
   }
+
+  animate();
 }
 
+// 💥 Start multiple bursts
 function startFireworks() {
-  for (let i = 0; i < 20; i++) {
-    createFirework();
+  for (let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      createFirework();
+    }, i * 150); // staggered bursts (looks cinematic)
   }
 }
 
-// 💌 Click event
+// 💌 Click event (FINAL)
 envelope.addEventListener("click", () => {
   letter.style.display = "block";
 
-  // smooth fade in
   setTimeout(() => {
     letter.style.opacity = "1";
   }, 50);
 
   typeLetter(message, letterText);
+
+  fireworksActive = true;
   startFireworks();
+
+  // 🛑 STOP after 3 seconds
+  setTimeout(() => {
+    fireworksActive = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }, 3000);
 });
