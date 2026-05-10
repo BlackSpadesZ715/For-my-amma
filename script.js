@@ -200,3 +200,16 @@ envelope.addEventListener("click", () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }, 3000);
 });
+const memories = document.querySelectorAll(".memory");
+
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+
+  memories.forEach((img, index) => {
+    if (scroll > 1000 + index * 400) {
+      img.style.opacity = "1";
+    } else {
+      img.style.opacity = "0";
+    }
+  });
+});
