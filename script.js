@@ -17,7 +17,6 @@ window.addEventListener("scroll", () => {
 
   scene.style.background = `rgb(${r}, ${g}, ${b})`;
 
-  // 👇 ADD THIS PART
   const moon = document.getElementById("moon");
   moon.style.top = `${80 - progress * 60}%`;
 });
@@ -59,18 +58,64 @@ const letter = document.getElementById("letter");
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
+// ✅ IMPORTANT — canvas size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-envelope.addEventListener("click", () => {
-  letter.style.display = "block";
-  startFireworks();
-});
+const message = `Amma…
 
-function startFireworks() {
-  for (let i = 0; i < 20; i++) {
-    createFirework();
+I don’t say this enough…
+but everything I am… every little good thing in me… is because of you.
+
+The way I speak, the way I care, the way I try again even when I’m tired…
+that all comes from watching you.
+
+You scold me… sometimes a lot…
+but even then, you’re the same person who asks if I’ve eaten,
+who secretly gives me the bigger portion,
+who pretends to be strict but melts the second I’m quiet.
+
+You always take care of me,
+in ways so small I don’t even notice in the moment…
+but later, they sit in my heart like warm light.
+
+You’ve carried so much for me…
+things I didn’t see, things I didn’t understand…
+and yet you never let me feel that weight.
+
+I may not always say it…
+I may act stubborn, or distant, or lost in my own world…
+but not a single day passes where I don’t feel your love around me.
+
+It’s in the food you make,
+in the way you call my name,
+in the quiet way you worry about me even when you don’t say it out loud.
+
+And maybe I don’t say this enough…
+maybe I never will be able to say it as deeply as I feel it…
+
+…but Amma, you are my home.
+My safe place.
+My everything.
+
+I love you… more than my words know how to hold. ❤️
+`;
+
+const letterText = document.getElementById("letterText");
+
+function typeLetter(text, element, speed = 40) {
+  let i = 0;
+  element.innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
   }
+
+  typing();
 }
 
 function createFirework() {
@@ -102,3 +147,16 @@ function createFirework() {
   }
 }
 
+// ✅ ADD THIS (you were missing it)
+function startFireworks() {
+  for (let i = 0; i < 20; i++) {
+    createFirework();
+  }
+}
+
+// ✅ CLICK EVENT (final trigger)
+envelope.addEventListener("click", () => {
+  letter.style.display = "block";
+  typeLetter(message, letterText);
+  startFireworks();
+});
