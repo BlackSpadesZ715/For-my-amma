@@ -5,7 +5,6 @@ body, html {
   font-family: 'Segoe UI', sans-serif;
 }
 
-/* INTRO */
 .intro {
   position: fixed;
   width: 100%;
@@ -20,24 +19,20 @@ body, html {
   z-index: 999;
 }
 
-/* SCENE */
 .scene {
   position: relative;
   height: 300vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 1s;
 }
 
 .text {
   position: absolute;
   top: 40%;
   color: white;
-  font-size: 2rem;
 }
 
-/* MOON */
 .moon {
   position: absolute;
   top: 80%;
@@ -49,7 +44,6 @@ body, html {
   transform: translate(-50%, -50%);
 }
 
-/* CLOUDS */
 .cloud {
   position: absolute;
   width: 120px;
@@ -66,7 +60,6 @@ body, html {
   to { transform: translateX(120vw); }
 }
 
-/* FLOWERS */
 .petal {
   position: absolute;
   width: 15px;
@@ -77,10 +70,9 @@ body, html {
 }
 
 @keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
+  to { transform: translateY(110vh); }
 }
 
-/* SPARK */
 .spark {
   position: absolute;
   width: 6px;
@@ -89,7 +81,6 @@ body, html {
   border-radius: 50%;
 }
 
-/* ENVELOPE */
 .envelope {
   position: absolute;
   bottom: 20%;
@@ -97,7 +88,6 @@ body, html {
   cursor: pointer;
 }
 
-/* LETTER */
 .letter {
   position: fixed;
   top: 50%;
@@ -113,18 +103,13 @@ body, html {
   z-index: 1000;
 }
 
-/* FIREWORKS */
 #fireworks {
   position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index: 500;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* MEMORIES */
 .memories {
   height: 300vh;
   background: black;
@@ -138,7 +123,6 @@ body, html {
   transition: 1s;
 }
 
-/* GAME */
 .game {
   height: 200vh;
   background: black;
@@ -146,9 +130,18 @@ body, html {
   text-align: center;
 }
 
+#gameArea {
+  position: relative;
+  height: 80vh;
+}
+
 .falling-heart {
   position: absolute;
-  font-size: 24px;
+  top: -30px;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 10;
   animation: fallHeart 4s linear;
 }
 
@@ -156,7 +149,6 @@ body, html {
   to { transform: translateY(90vh); }
 }
 
-/* FINAL */
 .final {
   height: 100vh;
   background: #111;
