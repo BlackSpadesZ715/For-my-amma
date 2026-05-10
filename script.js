@@ -55,4 +55,51 @@ document.addEventListener("mousemove", (e) => {
     spark.remove();
   }, 500);
 });
+const envelope = document.getElementById("envelope");
+const letter = document.getElementById("letter");
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+envelope.addEventListener("click", () => {
+  letter.style.display = "block";
+  startFireworks();
+});
+
+function startFireworks() {
+  for (let i = 0; i < 20; i++) {
+    createFirework();
+  }
+}
+
+function createFirework() {
+  let x = Math.random() * canvas.width;
+  let y = Math.random() * canvas.height / 2;
+
+  for (let i = 0; i < 50; i++) {
+    let angle = Math.random() * 2 * Math.PI;
+    let speed = Math.random() * 4;
+
+    let dx = Math.cos(angle) * speed;
+    let dy = Math.sin(angle) * speed;
+
+    let life = 50;
+
+    function animate() {
+      if (life-- <= 0) return;
+
+      ctx.fillStyle = "white";
+      ctx.fillRect(x, y, 2, 2);
+
+      x += dx;
+      y += dy;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+}
 
