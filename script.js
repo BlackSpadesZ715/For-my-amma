@@ -1,47 +1,33 @@
+// INTRO + MUSIC
 const intro = document.getElementById("intro");
 const music = document.getElementById("bgMusic");
 
-intro.addEventListener("click", () => {
+intro.onclick = () => {
   intro.style.display = "none";
+  music.volume = 0.4;
+  music.play().catch(()=>{});
+};
 
-  music.volume = 0;
-  music.play();
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    if (vol < 0.4) {
-      vol += 0.02;
-      music.volume = vol;
-    } else clearInterval(fade);
-  }, 200);
-});
-
-/* 🌇 Scroll sky */
+// SKY + MOON
 window.addEventListener("scroll", () => {
-  const scroll = window.scrollY;
-  const max = document.body.scrollHeight - window.innerHeight;
-  const p = scroll / max;
-
-  const scene = document.getElementById("scene1");
-  scene.style.background = `rgb(${255 - p*255}, ${150 - p*150}, ${100 + p*155})`;
-
-  document.getElementById("moon").style.top = `${80 - p*60}%`;
+  let p = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  scene1.style.background = `rgb(${255-200*p},${150-100*p},${100+150*p})`;
+  moon.style.top = `${80 - p*60}%`;
 });
 
-/* 🌸 Petals */
-const flowers = document.querySelector(".flowers");
+// FLOWERS
 setInterval(() => {
-  const p = document.createElement("div");
+  let p = document.createElement("div");
   p.className = "petal";
-  p.style.left = Math.random()*100 + "vw";
-  p.style.animationDuration = 5 + Math.random()*5 + "s";
-  flowers.appendChild(p);
+  p.style.left = Math.random()*100+"vw";
+  p.style.animationDuration = 5+Math.random()*5+"s";
+  document.querySelector(".flowers").appendChild(p);
   setTimeout(()=>p.remove(),10000);
 },300);
 
-/* ✨ Spark */
-document.addEventListener("mousemove", e => {
-  const s = document.createElement("div");
+// SPARK
+document.addEventListener("mousemove", e=>{
+  let s = document.createElement("div");
   s.className="spark";
   s.style.left=e.pageX+"px";
   s.style.top=e.pageY+"px";
@@ -49,63 +35,89 @@ document.addEventListener("mousemove", e => {
   setTimeout(()=>s.remove(),500);
 });
 
-/* 💌 Letter */
+// LETTER
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
-const textEl = document.getElementById("letterText");
+const letterText = document.getElementById("letterText");
 
-const msg = `Amma...
+const message = `Amma...
 
-Everything I am... is because of you.
+I don’t say this enough...
+but everything I am is because of you.
 
 You scold me… but still feed me extra.
 
-You take care of me even when I don’t notice.
+I love you ❤️`;
 
-I may not always say it…
-
-…but I love you ❤️`;
-
-function type(text,i=0){
-  if(i<text.length){
-    textEl.innerHTML += text[i]==="\n"?"<br>":text[i];
-    setTimeout(()=>type(text,i+1),35);
+function typeLetter(t, el){
+  let i=0;
+  el.innerHTML="";
+  function typing(){
+    if(i<t.length){
+      el.innerHTML += t[i]==="\n"?"<br>":t[i];
+      i++;
+      setTimeout(typing,40);
+    }
   }
+  typing();
 }
 
-/* 🎆 Fireworks */
+// FIREWORKS
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
-canvas.width=innerWidth;
-canvas.height=innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-function fire(){
-  for(let i=0;i<100;i++){
-    ctx.fillRect(Math.random()*canvas.width,Math.random()*canvas.height,2,2);
+function firework(){
+  for(let i=0;i<80;i++){
+    let x=Math.random()*canvas.width;
+    let y=Math.random()*canvas.height/2;
+    ctx.fillStyle="white";
+    ctx.fillRect(x,y,2,2);
   }
 }
 
-envelope.onclick=()=>{
+// OPEN LETTER
+envelope.onclick = () => {
   letter.style.display="block";
-  setTimeout(()=>letter.style.opacity=1,50);
-  textEl.innerHTML="";
-  type(msg);
-  fire();
+  setTimeout(()=>letter.style.opacity="1",50);
+  typeLetter(message, letterText);
+  firework();
 };
 
-document.addEventListener("click",e=>{
-  if(!letter.contains(e.target)&&e.target.id!=="envelope"){
-    letter.style.opacity=0;
+// CLOSE LETTER
+document.addEventListener("click", (e)=>{
+  if(letter.style.display==="block" && !letter.contains(e.target) && e.target!==envelope){
+    letter.style.opacity="0";
     setTimeout(()=>letter.style.display="none",500);
   }
 });
 
-/* 📸 Memories */
-const mem=document.querySelectorAll(".memory");
+// MEMORIES
 window.addEventListener("scroll",()=>{
-  const s=window.scrollY;
-  mem.forEach((m,i)=>{
-    if(s>1200+i*400) m.classList.add("show");
-    else m.classList.remove("show");
+  document.querySelectorAll(".memory").forEach((img,i)=>{
+    if(scrollY>1000+i*400){
+      img.style.opacity=1;
+      img.style.top="20%";
+      img.style.left="10%";
+    }
   });
 });
+
+// GAME
+let score=0;
+setInterval(()=>{
+  let h=document.createElement("div");
+  h.className="falling-heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  gameArea.appendChild(h);
+
+  h.onclick=()=>{
+    score++;
+    document.getElementById("score").innerText=score;
+    h.remove();
+  };
+
+  setTimeout(()=>h.remove(),4000);
+},800);
