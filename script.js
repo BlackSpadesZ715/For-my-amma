@@ -41,7 +41,6 @@ if (flowerContainer) {
   setInterval(createPetal, 300);
 }
 
-setInterval(createPetal, 300);
 document.addEventListener("mousemove", (e) => {
   const spark = document.createElement("div");
   spark.classList.add("spark");
