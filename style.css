@@ -5,6 +5,7 @@ body, html {
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* 🌑 Intro */
 .intro {
   position: fixed;
   width: 100%;
@@ -18,8 +19,10 @@ body, html {
   cursor: pointer;
   z-index: 10;
 }
+
+/* 🌇 Scene */
 .scene {
-  position: relative; 
+  position: relative;
   height: 300vh;
   display: flex;
   justify-content: center;
@@ -27,6 +30,8 @@ body, html {
   background: linear-gradient(to top, #ff7e5f, #feb47b);
   transition: background 1s;
 }
+
+/* ✨ Main text */
 .text {
   position: absolute;
   left: 50%;
@@ -37,10 +42,8 @@ body, html {
   color: white;
   font-size: 2rem;
 }
-.text.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+
+/* 🌙 Moon */
 .moon {
   position: absolute;
   top: 80%;
@@ -54,14 +57,15 @@ body, html {
   transition: top 0.2s;
 }
 
+/* ☁️ Clouds */
 .cloud {
   position: absolute;
   width: 120px;
   height: 60px;
-  background: rgba(255, 255, 255, 0.8); /* softer */
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 50px;
   opacity: 0.6;
-  filter: blur(2px); /* 👈 magic touch */
+  filter: blur(2px);
 }
 
 .cloud1 {
@@ -77,17 +81,13 @@ body, html {
 }
 
 @keyframes moveClouds {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(120vw);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(120vw); }
 }
+
+/* 🌸 Petals */
 .flowers {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
@@ -99,9 +99,8 @@ body, html {
   top: -20px;
   width: 20px;
   height: 20px;
-  background: hotpink; 
+  background: hotpink;
   border-radius: 50%;
-  opacity: 1;
   animation: fall linear infinite;
   z-index: 51;
 }
@@ -111,11 +110,13 @@ body, html {
     transform: translateY(110vh) rotate(360deg);
   }
 }
+
+/* ✨ Spark */
 .spark {
   position: absolute;
   width: 10px;
   height: 10px;
-  background: yellow; /* super visible */
+  background: yellow;
   border-radius: 50%;
   pointer-events: none;
   animation: sparkle 0.5s linear;
@@ -128,6 +129,8 @@ body, html {
     opacity: 0;
   }
 }
+
+/* 💌 Envelope */
 .envelope {
   position: absolute;
   bottom: 20%;
@@ -140,6 +143,8 @@ body, html {
 .envelope:hover {
   transform: scale(1.2);
 }
+
+/* 🎆 Fireworks */
 #fireworks {
   position: fixed;
   top: 0;
@@ -147,11 +152,14 @@ body, html {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 150; /* 👈 below letter (200), above everything else */
+  z-index: 150;
 }
+
+/* 📜 Letter */
 #letterText {
   margin-top: 10px;
 }
+
 .letter {
   position: fixed;
   top: 50%;
@@ -175,6 +183,8 @@ body, html {
   opacity: 0;
   transition: opacity 0.5s ease;
 }
+
+/* 📸 Memories section */
 .memories {
   height: 300vh;
   position: relative;
@@ -182,12 +192,18 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
+/* 📸 Individual photos */
 .memory {
   position: absolute;
   max-width: 80%;
+  max-height: 70vh;
   border-radius: 15px;
+
   opacity: 0;
-  transition: opacity 1s ease;
+  transform: scale(0.9);
+
+  transition: opacity 1s ease, transform 1s ease;
 }
