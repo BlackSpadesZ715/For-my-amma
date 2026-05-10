@@ -39,54 +39,37 @@ const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const letterText = document.getElementById("letterText");
 
-const message = `AAmma…
-
+const message = `Amma…na buji buji amma...
 There are so many things I carry in my heart that never quite make it to my lips. Words feel small sometimes, like trying to fit the ocean into a cup… but today I’m going to try anyway.
-
 From the very beginning, before I even understood the world, you were already there… holding it together for me. You were my first home, my first comfort, my first safe place. Even now, no matter how big life gets or how far I wander, everything inside me still knows one truth… you are where I belong.
-
 You’ve loved me in ways I didn’t even notice at the time. In the extra spoon of food you quietly added to my plate. In the way you stayed awake when I was sick, even if you had a long day ahead. In the scolding that sounded harsh but was always wrapped in worry. In the little sacrifices you never announced, never complained about… just did, because that’s who you are.
-
 I know I don’t always make it easy for you.
-
 Sometimes I answer back.
 Sometimes I stay silent when I should say thank you.
 Sometimes I act like I don’t care… even though I do, more than I can explain.
-
 But Amma, every small thing you do… it stays with me. It shapes me. It becomes a part of who I am.
-
 You are the reason I know what love feels like without conditions.
 You are the reason I know what strength looks like, even when no one is watching.
 You are the reason I can stand back up after falling… because somewhere in my heart, your voice is always there, telling me I can.
-
 I’ve seen you tired… but still smiling.
 I’ve seen you worried… but still strong.
 I’ve seen you put everyone before yourself, again and again, like your love has no limit.
-
 And sometimes I wonder… who takes care of you, Amma?
-
 Because you deserve the same warmth you give so freely.
 You deserve someone to notice when you’re tired.
 You deserve someone to say, “Sit down, I’ll handle it today.”
-
 Maybe I can’t do everything yet… but I promise, I’m learning. For you.
-
 One day, I want to be the reason you rest peacefully.
 One day, I want to give you a life where you don’t have to worry so much.
 One day, I want to make you as proud as you’ve always made me feel safe.
-
 And even if I don’t say it every day…
 Even if I act distant or distracted…
-
 Please know this, deeply and truly—
-
 Every heartbeat of mine carries a piece of you.
-
 You’re not just my mother.
 You are my quiet strength.
 My constant.
 My forever person.
-
 I love you more than my words will ever be able to hold… ❤️`;
 
 function typeLetter(t, el){
