@@ -1,9 +1,10 @@
+// 🎬 Intro click
 const intro = document.getElementById("intro");
-
 intro.addEventListener("click", () => {
   intro.style.display = "none";
 });
 
+// 🌇 Scroll animation (sky + moon)
 window.addEventListener("scroll", () => {
   const scroll = window.scrollY;
   const maxScroll = document.body.scrollHeight - window.innerHeight;
@@ -20,6 +21,8 @@ window.addEventListener("scroll", () => {
   const moon = document.getElementById("moon");
   moon.style.top = `${80 - progress * 60}%`;
 });
+
+// 🌸 Falling petals
 const flowerContainer = document.querySelector(".flowers");
 
 if (flowerContainer) {
@@ -27,12 +30,12 @@ if (flowerContainer) {
     const petal = document.createElement("div");
     petal.classList.add("petal");
 
-  petal.style.left = Math.random() * 100 + "vw";
-  petal.style.animationDuration = 5 + Math.random() * 5 + "s";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = 5 + Math.random() * 5 + "s";
 
-  flowerContainer.appendChild(petal);
+    flowerContainer.appendChild(petal);
 
-  setTimeout(() => {
+    setTimeout(() => {
       petal.remove();
     }, 10000);
   }
@@ -40,6 +43,7 @@ if (flowerContainer) {
   setInterval(createPetal, 300);
 }
 
+// ✨ Cursor spark
 document.addEventListener("mousemove", (e) => {
   const spark = document.createElement("div");
   spark.classList.add("spark");
@@ -53,18 +57,21 @@ document.addEventListener("mousemove", (e) => {
     spark.remove();
   }, 500);
 });
+
+// 💌 Envelope + Letter + Fireworks
 const envelope = document.getElementById("envelope");
 const letter = document.getElementById("letter");
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
-// ✅ IMPORTANT — canvas size
+// canvas size
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-const message = `Amma…
+// ✍️ Message
+const message = `Amma...
 
-I don’t say this enough…
+I don’t say this enough...
 but everything I am… every little good thing in me… is because of you.
 
 The way I speak, the way I care, the way I try again even when I’m tired…
@@ -98,11 +105,11 @@ maybe I never will be able to say it as deeply as I feel it…
 My safe place.
 My everything.
 
-I love you… more than my words know how to hold. ❤️
-`;
+I love you… more than my words know how to hold. ❤️`;
 
 const letterText = document.getElementById("letterText");
 
+// ✍️ Typing effect
 function typeLetter(text, element, speed = 40) {
   let i = 0;
   element.innerHTML = "";
@@ -118,6 +125,7 @@ function typeLetter(text, element, speed = 40) {
   typing();
 }
 
+// 💥 Fireworks
 function createFirework() {
   let x = Math.random() * canvas.width;
   let y = Math.random() * canvas.height / 2;
@@ -147,16 +155,21 @@ function createFirework() {
   }
 }
 
-// ✅ ADD THIS (you were missing it)
 function startFireworks() {
   for (let i = 0; i < 20; i++) {
     createFirework();
   }
 }
 
-// ✅ CLICK EVENT (final trigger)
+// 💌 Click event
 envelope.addEventListener("click", () => {
   letter.style.display = "block";
+
+  // smooth fade in
+  setTimeout(() => {
+    letter.style.opacity = "1";
+  }, 50);
+
   typeLetter(message, letterText);
   startFireworks();
 });
