@@ -1,10 +1,21 @@
 const intro = document.getElementById("intro");
-const text = document.querySelector(".text");
 
 intro.addEventListener("click", () => {
   intro.style.display = "none";
+});
 
-  setTimeout(() => {
-    text.classList.add("show");
-  }, 500);
+// SKY TRANSITION
+window.addEventListener("scroll", () => {
+  const scroll = window.scrollY;
+  const maxScroll = document.body.scrollHeight - window.innerHeight;
+  const progress = scroll / maxScroll;
+
+  const scene = document.getElementById("scene1");
+
+  // sunset colors
+  const r = Math.floor(255 - progress * 200);
+  const g = Math.floor(126 - progress * 100);
+  const b = Math.floor(95 + progress * 100);
+
+  scene.style.background = `rgb(${r}, ${g}, ${b})`;
 });
